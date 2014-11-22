@@ -1,0 +1,21 @@
+#header_title {
+	text-align: center;
+	color: #008cba;
+}
+#main_div {
+	margin: 20px;
+}
+
+#side_bar {
+	background-color: #DADADA;
+	border-radius: 5px;
+}
+
+.side_bar_section {
+	border-bottom: solid 1px;
+	border-color: #999797;
+}
+
+.error {
+	color: red;
+}
