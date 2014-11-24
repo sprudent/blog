@@ -5,7 +5,7 @@ class PostModel {
 	private $link;
 
 	public function __construct() {
-        $this->link = mysqli_connect("127.0.0.1", "root", "", "blogcesi");
+        $this->link = mysqli_connect("127.0.0.1", "root", "\$Hello4475\$", "blogcesi");
     }
 
 	public function listAll() {

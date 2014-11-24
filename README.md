@@ -77,3 +77,4 @@ Jour 5
 manipulation de la variable globale SESSION en php pour mettre en place un mecanisme de connexion
 Ionic framework & Cordova & Angular JS
 Code Académique formation en ligne
+TinyMCE -advanced TextAreas
