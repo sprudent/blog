@@ -14,26 +14,39 @@
 			<p><?php echo $contenu ?></p>
 		</div>
 	</div>
+
+	<div id="comments-actions">
+		<h1>Commentaires</h1>
+		<div id="comments"></div>
+		<div>
+			<a id="new-com" href="#" class="button small success expand radius">Nouveau commentaire</a>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="small-12 medium-4 columns">
-			<a href ="#" class="button small radius expand">Commentaires</a>
+			<a id="comment-button" href ="#" class="button small radius expand">Commentaires >></a>
 		</div>
 		<div class="small-12 medium-4 columns">
-			<a id="like-button" href ="index.php?control=post&task=like&id=<?php echo $id ?>&js=false" class="button small radius expand">Like(<span id="nb-like"><?php echo $like ?></span>)</a>
+			<a id="like-button" href ="#" class="button small radius expand">Like(<span id="nb-like"><?php echo $like ?></span>)</a>
 		</div>
 		<div class="small-12 medium-4 columns">
 			<a href ="index.php" class="button small radius expand">Retour</a>
 		</div>
 	</div>
 </div>
-<?php if(!empty($error)): ?>
-    <div id="error" class="error" class="row"><?php echo $error ?></div> 
-<?php endif?>
+
+<div id="error" class="error" class="row">
+	<?php if(!empty($error)) {
+		echo $error; 
+	} ?>
+</div> 
 
 <script>
 	$(window).load(function() {
+		$("#comments-actions").hide();
 		$("#like-button").click(function() {
-			var url = "index.php?control=post&task=like&id=<?php echo $id ?>&js=true";
+			var url = "index.php?control=post&task=like&id=<?php echo $id ?>";
 			console.log(url);
 			$.ajax(url, {dataType: "json"}).done(function(data) {
 				if(data.success) {
@@ -45,6 +58,54 @@
 				}
 			}); 
 			return false;
-		});	
+		});
+
+		$("#comment-button").click(function() {
+			if($("#comments-actions").is(":visible")) {
+				hideComments();
+			} else {
+				displayComments();
+			}
+			return false;
+		});
+
+		function displayComments() {
+			var url = "index.php?control=comment&task=displayComments&id=<?php echo $id ?>";
+			$("#comments").empty();
+			$.ajax(url, {dataType: "json"}).done(function(data) {
+				$.each(data, function(index, value) {
+					var currentCom = $("<div/>").addClass("row panel radius com");
+					currentCom.attr("id", value.id);
+
+					currentContent = $("<div/>").html(value.content);
+					currentContent.appendTo(currentCom);
+
+					currentAuthor = $("<div/>").html(value.authorName).addClass("right");
+					currentAuthor.appendTo(currentCom);
+
+					currentCom.appendTo($("#comments"));
+				});
+			}); 
+			$("#comment-button").html("Commentaires <<");
+			$("#comments-actions").fadeIn();
+		}
+
+		function hideComments() {
+			$("#comment-button").html("Commentaires >>");
+			$("#comments-actions").fadeOut();
+		}
+
+		function addComment() {
+			var url = "index.php?control=comment&task=addComments";
+			/*$.ajax({
+				url: url,
+				data: {
+					postId: <?php echo $id ?>,
+					userId: <php echo
+				}
+			}).done(function(data) {
+
+			});*/
+		}
 	});
 </script>

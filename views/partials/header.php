@@ -22,7 +22,7 @@
 	<div id="main_div" class="row">
 		<h1 id="header_title">Blog du CESI</h1>
 		<div class="small-12 medium-3 medium-uncentered columns">
-			<div class="panel">
+			<div class="panel radius">
 				<div class="row">
 					<?php if(!AccessHelper::isConnected()):?>
 						<div>

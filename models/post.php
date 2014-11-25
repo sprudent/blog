@@ -12,7 +12,6 @@ class PostModel {
 		$query  = "SELECT * FROM post"; 
 		$result = $this->link->query($query); 
 
-	    //display information: 
 	    $posts = array();
 	    while($row = $result->fetch_object()) { 
 	        $posts[] = $row;

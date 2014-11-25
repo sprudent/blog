@@ -16,13 +16,10 @@ class PostControl extends BaseControl{
 	public function suppression() {
 		if(empty($_GET['id']) || !is_numeric($_GET['id']) || !AccessHelper::isAdmin()) {
 			header("Location: index.php");
+		} else {
+	    	$this->model->remove($_GET['id']);
+	    	header('index.php'); 
 		}
-
-	    $this->model->remove($_GET['id']);
-	    header('index.php'); 
-	}
-
-	public function connect() {
 
 	}
 
@@ -43,15 +40,10 @@ class PostControl extends BaseControl{
 	public function like() {
 		if(empty($_GET['id']) || !is_numeric($_GET['id'])) {
 			header("Location: index.php");
-		}
-		$errorMessage = "Erreur : Le vote n'a pas été pris en compte";
-		$success = $this->model->like($_GET['id']); 
-		if($_GET['js'] == 'false') {
-			if(!$success) {
-				$this->vars['error'] = $errorMessage;
-			} 
-			$this->article();
 		} else {
+			$errorMessage = "Erreur : Le vote n'a pas été pris en compte";
+			$success = $this->model->like($_GET['id']); 
+			
 			echo json_encode(array("success"=>$success, "errorMessage"=>$errorMessage));
 			exit();
 		}
