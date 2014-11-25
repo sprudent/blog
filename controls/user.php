@@ -10,7 +10,7 @@ class UserControl extends BaseControl{
 
 	public function connect() {
         if(!empty($_POST['login']) && !empty($_POST['pass'])) {	           
-        	$connexionInfos = $this->model->get($_POST['login'], $_POST['pass']);
+        	$connexionInfos = $this->model->authenticate($_POST['login'], $_POST['pass']);
 	        if($connexionInfos) { 
                 $_SESSION['user'] = $connexionInfos;
             }

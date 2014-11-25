@@ -15,23 +15,25 @@
 		</div>
 	</div>
 
-	<div id="comments-actions">
+	<hr>
+
+	<div id="comments-actions" class="row">
 		<h1>Commentaires</h1>
 		<div id="comments"></div>
-		<div>
-			<a id="new-com" href="#" class="button small success expand radius">Nouveau commentaire</a>
+		<div class="columns">
+			<a id="new-com" href="#" class="button small success expand">Nouveau commentaire</a>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="small-12 medium-4 columns">
-			<a id="comment-button" href ="#" class="button small radius expand">Commentaires >></a>
+		<div class="medium-4 columns">
+			<a id="comment-button" href ="#" class="button small expand">Commentaires >></a>
 		</div>
-		<div class="small-12 medium-4 columns">
-			<a id="like-button" href ="#" class="button small radius expand">Like(<span id="nb-like"><?php echo $like ?></span>)</a>
+		<div class="medium-4 columns">
+			<a id="like-button" href ="#" class="button small expand">Like(<span id="nb-like"><?php echo $like ?></span>)</a>
 		</div>
-		<div class="small-12 medium-4 columns">
-			<a href ="index.php" class="button small radius expand">Retour</a>
+		<div class="medium-4 columns">
+			<a href ="index.php" class="button small expand">Retour</a>
 		</div>
 	</div>
 </div>
@@ -74,7 +76,7 @@
 			$("#comments").empty();
 			$.ajax(url, {dataType: "json"}).done(function(data) {
 				$.each(data, function(index, value) {
-					var currentCom = $("<div/>").addClass("row panel radius com");
+					var currentCom = $("<div/>").addClass("row panel com");
 					currentCom.attr("id", value.id);
 
 					currentContent = $("<div/>").html(value.content);

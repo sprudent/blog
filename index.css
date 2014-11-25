@@ -2,13 +2,14 @@
 	text-align: center;
 	color: #008cba;
 }
-#main_div {
-
-}
 
 #side_bar {
 	background-color: #DADADA;
 	border-radius: 5px;
+}
+
+#content{
+	background-color: #FFF;
 }
 
 .side_bar_section {
@@ -22,4 +23,26 @@
 
 .com {
 	margin: 15px 0 15px 0 !important;
+}
+
+#side_panel {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.panel {
+	border-width: 0px !important;	
+}
+
+.button {
+	padding-top: 0.40556em !important; 
+	padding-bottom: 0.40556em !important;
+}
+
+body#global {
+	background: #DDDDDD;
+}
+
+*{
+	font-family: 'Roboto', sans-serif;
 }

@@ -20,6 +20,7 @@
     <div class="row">
         <textarea name="contenu" id="contenu" rows="4" cols="50"><?php echo $contenu?></textarea>
     </div>
+    <hr>
     <div class="row">
         <input type="submit" name="submit" class="button small radius"/>
         <a href="index.php" class="button small radius">Retour</a>
