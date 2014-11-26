@@ -9,14 +9,6 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/jquery.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation.min.js"></script>
-    <script type="text/javascript" src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-	<script>
-		tinymce.init({
-		    selector: "textarea",
-		    theme: "modern",
-		    plugins: ["image"],
-		 }); 
-	</script>
 </head>
 
 <body id='global'>

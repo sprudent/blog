@@ -35,7 +35,7 @@ class CommentModel {
 		while($row = $result->fetch_object()) {
 			$id         = $row->id;
 			$content    = $row->content;
-			$postTitle  = $postModel->get($postId)->titre;
+			$postTitle  = $postModel->get($postId)->title;
 			$authorName = $userModel->get($row->id_user)->login;
 			$date       = $row->date;
 			$comment    = new Comment($id, $postTitle, $authorName, $content, $date);
@@ -48,7 +48,7 @@ class CommentModel {
 
 		$content = addslashes($content);
 
-		$query = "INSERT INTO comment(id_user, id_post, content, date) VALUES('".$userId."','".$postId."','".$content."','".time()."')";
+		$query = "INSERT INTO comment(id_user, id_post, content, date) VALUES('".$userId."','".$postId."','".$content."','".date('Y-m-d',time())."')";
         return $this->link->query($query);
 	}
 }

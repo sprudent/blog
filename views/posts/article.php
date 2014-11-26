@@ -2,21 +2,26 @@
 
 	<div id='article' class="row">
 		<div class="columns">
-			<h1><?php echo $titre ?></h1>
+			<h1><?php echo $post->title ?></h1>
 		</div>
 		<div class="columns">
-			<h2><?php echo $soustitre ?></h2>
+			<h2><?php echo $post->subtitle ?></h2>
 		</div>
 		<div class="columns">
-			<?php echo $introduction ?>
+			<?php echo $post->introduction ?>
 		</div>
 		<div class="columns">
-			<p><?php echo $contenu ?> </p>
+			<p><?php echo $post->content ?> </p>
 		</div>
 		<div class="columns">
 			<div class="right">
-				<span>Auteur : <?php echo $author ?></span>
-				<span>Date : <?php echo $date ?></span>
+				<div><?php echo $post->authorName ?></div>
+				<div><?php echo $post->date ?></div>
+				<hr>
+				<div id="like-post-button" class="button small">
+					<img src="ressources/like.png" width="25px" height="25px" alt="like button"></img> 
+					<span id="nb-like"><?php echo $post->like ?></span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -26,8 +31,8 @@
 	<div id="comments-actions" class="row">
 		<h1>Commentaires</h1>
 		<div id="comments"></div>
-		<hr>
 		<div id="add-comment-section">
+			<hr>
 			<h1>Nouveau commentaire</h1>
 			<div class="columns">
 				<textarea id="add-comment-content"></textarea>
@@ -42,10 +47,7 @@
 		<div class="medium-4 columns">
 			<a id="comment-button" href ="#" class="button small expand">Commentaires >></a>
 		</div>
-		<div class="medium-4 columns">
-			<a id="like-button" href ="#" class="button small expand">Like(<span id="nb-like"><?php echo $like ?></span>)</a>
-		</div>
-		<div class="medium-4 columns">
+		<div class="medium-4 columns end">
 			<a href ="index.php" class="button small expand">Retour</a>
 		</div>
 	</div>
@@ -60,9 +62,11 @@
 <script>
 	$(window).load(function() {
 		$("#comments-actions").hide();
-		$("#comments-add").hide();
-		$("#like-button").click(function() {
-			var url = "index.php?control=post&task=like&id=<?php echo $id ?>";
+		if(!<?php echo (AccessHelper::isConnected()? "true" : "false") ?>) {
+			$("#add-comment-section").hide();
+		} 
+		$("#like-post-button").click(function() {
+			var url = "index.php?control=post&task=like&id=<?php echo $post->id ?>";
 			console.log(url);
 			$.ajax(url, {dataType: "json"}).done(function(data) {
 				if(data.success) {
@@ -91,7 +95,7 @@
 		});
 
 		function displayComments() {
-			var url = "index.php?control=comment&task=displayComments&id=<?php echo $id ?>";
+			var url = "index.php?control=comment&task=displayComments&id=<?php echo $post->id ?>";
 			$("#comments").empty();
 			$.ajax(url, {dataType: "json"}).done(function(data) {
 				$.each(data, function(index, value) {
@@ -101,7 +105,7 @@
 					currentContent = $("<div/>").html(value.content);
 					currentContent.appendTo(currentCom);
 
-					currentAuthor = $("<div/>").html(value.authorName).addClass("right");
+					currentAuthor = $("<div/>").html("<div>"+value.authorName+"</div><div>"+value.date+"</div>").addClass("right");
 					currentAuthor.appendTo(currentCom);
 
 					currentCom.appendTo($("#comments"));
@@ -122,7 +126,7 @@
 
 		function hideComments() {
 			$("#comment-button").html("Commentaires >>");
-			$("#comments-actions").fadeOut(2000);
+			$("#comments-actions").fadeOut(1200);
 			$('html, body').animate({
 		        scrollTop: $("#article").offset().top
 		    }, 1000);
@@ -131,9 +135,8 @@
 		function addComment() {
 			var url = "index.php?control=comment&task=addComments";
 			var dataToSend = {
-				postId: <?php echo $id?>,
-				userId: <?php echo $_SESSION["user"]->id?>,
-				content: tinymce.get('add-comment-content').getContent()
+				postId: <?php echo $post->id?>,
+				content: $('#add-comment-content').val()
 			}
 			$.ajax({
 				url: url,

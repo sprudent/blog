@@ -27,14 +27,7 @@ class PostControl extends BaseControl{
 		if(empty($_GET['id']) || !is_numeric($_GET['id'])) {
 			header("Location: index.php");
 		}
-		$result = $this->model->get($_GET['id']);
-		$this->vars['id']			= $_GET['id'];
-        $this->vars['titre']        = $result->titre;
-        $this->vars['soustitre']    = $result->soustitre;
-        $this->vars['introduction'] = $result->introduction;
-        $this->vars['contenu']      = $result->contenu;
-        $this->vars['like']			= $result->like;
-        $this->vars['date']			= $result->date;
+		$this->vars['post'] = $this->model->get($_GET['id']);
         $this->render('article');
 	}
 

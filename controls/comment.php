@@ -23,10 +23,10 @@ class CommentControl extends BaseControl{
 
 	public function addComments() {
 		$comment = json_decode($_POST['comment']);
-		if(empty($comment)) {
+		if(!AccessHelper::isConnected() || empty($comment)) {
 			echo false;
 		} else {
-			$this->model->add($comment->postId, $comment->userId, $comment->content);
+			$this->model->add($comment->postId, $_SESSION["user"]->id, $comment->content);
 			echo true;
 		}
 	}

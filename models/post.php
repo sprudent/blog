@@ -1,5 +1,7 @@
 <?php	
 
+require_once("entities/post.php");
+
 class PostModel {
 
 	private $link;
@@ -20,9 +22,27 @@ class PostModel {
 	}
 
 	public function get($id) { 
-		$query  = "SELECT * FROM post WHERE id=".$id; 
-		$result = $this->link->query($query); 
-	    return $result->fetch_object();
+
+		require_once('models/user.php');
+
+		$query     = "SELECT * FROM post WHERE id=".$id; 
+		$result    = $this->link->query($query); 
+		$row       = $result->fetch_object();
+		$userModel = new UserModel();
+
+		$id = $row->id;
+		$title        = $row->titre;
+		$subtitle     = $row->soustitre;
+		$introduction = $row->introduction;
+		$content      = $row->contenu;
+		$authorName   = $userModel->get($row->id)->login;
+		$like         = $row->like;
+		$date         = $row->date;
+
+		$post = new Post($id, $title, $subtitle, $introduction, $content, $authorName, $like, $date);
+
+
+	    return $post;
 	}
 
 	public function add($titre, $soustitre, $introduction, $contenu) {
