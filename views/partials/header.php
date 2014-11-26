@@ -16,7 +16,7 @@
 		    theme: "modern",
 		    plugins: ["image"],
 		 }); 
-		</script>
+	</script>
 </head>
 
 <body id='global'>

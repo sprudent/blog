@@ -34,6 +34,7 @@ class PostControl extends BaseControl{
         $this->vars['introduction'] = $result->introduction;
         $this->vars['contenu']      = $result->contenu;
         $this->vars['like']			= $result->like;
+        $this->vars['date']			= $result->date;
         $this->render('article');
 	}
 

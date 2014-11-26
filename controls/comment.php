@@ -22,7 +22,13 @@ class CommentControl extends BaseControl{
 	}
 
 	public function addComments() {
-		
+		$comment = json_decode($_POST['comment']);
+		if(empty($comment)) {
+			echo false;
+		} else {
+			$this->model->add($comment->postId, $comment->userId, $comment->content);
+			echo true;
+		}
 	}
 }	
 
