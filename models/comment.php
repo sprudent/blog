@@ -38,7 +38,8 @@ class CommentModel {
 			$postTitle  = $postModel->get($postId)->title;
 			$authorName = $userModel->get($row->id_user)->login;
 			$date       = $row->date;
-			$comment    = new Comment($id, $postTitle, $authorName, $content, $date);
+			$like 		= $row->like; 
+			$comment    = new Comment($id, $postTitle, $authorName, $content, $date, $like);
 			$comments[] = $comment;
 	    } 
 	    return $comments;
@@ -50,6 +51,11 @@ class CommentModel {
 
 		$query = "INSERT INTO comment(id_user, id_post, content, date) VALUES('".$userId."','".$postId."','".$content."','".date('Y-m-d',time())."')";
         return $this->link->query($query);
+	}
+
+	public function like($commentId) {
+		$query  = "UPDATE  comment SET `like`=`like`+1 WHERE id=".$commentId; 
+		return $this->link->query($query);
 	}
 }
 

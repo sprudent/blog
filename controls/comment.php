@@ -30,6 +30,15 @@ class CommentControl extends BaseControl{
 			echo true;
 		}
 	}
+
+	public function like() {
+		if(empty($_GET['id']) || !is_numeric($_GET['id'])) {
+			header("Location: index.php");
+		} else {
+			echo json_encode($this->model->like($_GET['id']));	
+			exit();
+		}
+	}
 }	
 
 ?>

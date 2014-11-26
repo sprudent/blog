@@ -100,13 +100,31 @@
 			$.ajax(url, {dataType: "json"}).done(function(data) {
 				$.each(data, function(index, value) {
 					var currentCom = $("<div/>").addClass("row panel text-justify com");
-					currentCom.attr("id", value.id);
+					currentCom.attr("id", "com-"+value.id);
 
 					currentContent = $("<div/>").html(value.content);
 					currentContent.appendTo(currentCom);
 
-					currentAuthor = $("<div/>").html("<div>"+value.authorName+"</div><div>"+value.date+"</div>").addClass("right");
-					currentAuthor.appendTo(currentCom);
+
+					commentInfos = $("<div/>").html("<div>"+value.authorName+"</div><div>"+value.date+"</div>").addClass("right");
+					commentLikeButton = $("<div class='button small'><img src='ressources/like.png' width='25px' height='25px' alt='like button'></img>  <span id='com-like-"+value.id+"'>"+value.like+"</span></div>");
+					commentInfos.append(commentLikeButton);
+					commentInfos.appendTo(currentCom);
+
+					currentCom.click(function() {
+						var url = "index.php?control=comment&task=like&id="+value.id;
+						$.ajax(url, {dataType: "json"}).done(function(data) {
+							if(data) {
+								var nbLike = $("#com-like-"+value.id).html();
+								console.log(nbLike);
+								nbLike++;
+								$("#com-like-"+value.id).html(nbLike);
+							} else {
+								$("#error").html(data.errorMess);
+							}
+						}); 
+						return false;
+					});
 
 					currentCom.appendTo($("#comments"));
 				});
