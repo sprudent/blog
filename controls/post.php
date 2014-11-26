@@ -18,7 +18,7 @@ class PostControl extends BaseControl{
 			header("Location: index.php");
 		} else {
 	    	$this->model->remove($_GET['id']);
-	    	header('index.php'); 
+	    	header('Location: index.php'); 
 		}
 
 	}
@@ -51,15 +51,15 @@ class PostControl extends BaseControl{
 	    }
 		if(!empty($_POST['submit'])) {
 
-			$this->vars['titre']        = $_POST['titre'];
-			$this->vars['soustitre']    = $_POST['soustitre'];
+			$this->vars['title']        = $_POST['title'];
+			$this->vars['subtitle']     = $_POST['subtitle'];
 			$this->vars['introduction'] = $_POST['introduction'];
-			$this->vars['contenu']      = $_POST['contenu'];
-			$this->vars['error'] 		= '';
+			$this->vars['content']      = $_POST['content'];
+			$this->vars['error']        = '';
 
-	        if(empty($this->vars['titre']) || empty($this->vars['soustitre']) || empty($this->vars['introduction']) || empty($this->vars['contenu'])) {	           
+	        if(empty($this->vars['title']) || empty($this->vars['subtitle']) || empty($this->vars['introduction']) || empty($this->vars['content'])) {	           
 				$this->vars['error']        = "Erreur : un champs n'est pas remplit";
-	        } else if($this->model->add($this->vars['titre'], $this->vars['soustitre'], $this->vars['introduction'], $this->vars['contenu'])) { 
+	        } else if($this->model->add($this->vars['title'], $this->vars['subtitle'], $this->vars['introduction'], $this->vars['content'])) { 
                 header("Location: index.php"); // success
             } else {
                 $this->vars['error'] = " Erreur : l'article n'a pas été ajouté";
@@ -77,35 +77,31 @@ class PostControl extends BaseControl{
 	    }
 	    if(!empty($_POST['submit'])) {
 
-	    	$this->vars['titre']        = $_POST['titre'];
-			$this->vars['soustitre']    = $_POST['soustitre'];
+			$this->vars['title']        = $_POST['title'];
+			$this->vars['subtitle']     = $_POST['subtitle'];
 			$this->vars['introduction'] = $_POST['introduction'];
-			$this->vars['contenu']      = $_POST['contenu'];
+			$this->vars['content']      = $_POST['content'];
 			$this->vars['error']        = "";
 
-	        if(empty($this->vars['titre']) || empty($this->vars['soustitre']) || empty($this->vars['introduction']) || empty($this->vars['contenu'])) {
+	        if(empty($this->vars['title']) || empty($this->vars['subtitle']) || empty($this->vars['introduction']) || empty($this->vars['content'])) {
 	            $this->vars['error'] = "Erreur : un champs n'est pas remplit";
-	        } else if($this->model->update($_GET['id'], $this->vars['titre'], $this->vars['soustitre'], $this->vars['introduction'], $this->vars['contenu'])) { 
+	        } else if($this->model->update($_GET['id'], $this->vars['title'], $this->vars['subtitle'], $this->vars['introduction'], $this->vars['content'])) { 
                 header("Location: index.php"); // success
                 exit();
             } else {
                 $this->vars['error'] = " Erreur : l'article n'a pas été créé";
             }
 	    } else {
-	        $result = $this->model->get($_GET['id']);
-	        $this->vars['titre']        = $result->titre;
-	        $this->vars['soustitre']    = $result->soustitre;
-	        $this->vars['introduction'] = $result->introduction;
-	        $this->vars['contenu']      = $result->contenu;
+	        $this->vars['post'] = $this->model->get($_GET['id']);
 	    } 
 	    $this->render('modification');
 	}
 
 	private function initVarsForCreationOrModification() {
-		$this->vars['titre']        = '';
-		$this->vars['soustitre']    = '';
+		$this->vars['title']        = '';
+		$this->vars['subtitle']    = '';
 		$this->vars['introduction'] = '';
-		$this->vars['contenu']      = '';
+		$this->vars['content']      = '';
 		$this->vars['error'] 		= '';
 	}
 }

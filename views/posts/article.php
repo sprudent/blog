@@ -106,7 +106,7 @@
 					currentContent.appendTo(currentCom);
 
 
-					commentInfos = $("<div/>").html("<div>"+value.authorName+"</div><div>"+value.date+"</div>").addClass("right");
+					commentInfos = $("<div/>").html("<div>"+value.authorName+"</div><div>"+value.date+"</div><hr>").addClass("right");
 					commentLikeButton = $("<div class='button small'><img src='ressources/like.png' width='25px' height='25px' alt='like button'></img>  <span id='com-like-"+value.id+"'>"+value.like+"</span></div>");
 					commentInfos.append(commentLikeButton);
 					commentInfos.appendTo(currentCom);

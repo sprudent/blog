@@ -22,6 +22,10 @@
 	<div id="side_panel" class="small-12 large-2 medium-uncentered columns">
 			<div class="panel">
 				<div class="row">
+						<div class="small-centered columns"><strong>Options générales</strong></div>
+						<br>
+						<div><a href="index.php" class="button small expand">Accueil</a></div>
+						<hr>
 					<?php if(!AccessHelper::isConnected()):?>
 						<div>
 							<form method="POST" action="index.php?control=user&task=connect" >
@@ -34,7 +38,7 @@
 						<div class="small-centered columns">
 							<strong>Utilisateur : <cite><?php echo $_SESSION['user']->login?></cite></strong>
 						</div>
-						<hr>
+						<br>
 						<div>
 							<a href="index.php?control=user&task=disconnect" class="button alert small expand">Déconnexion</a>
 							<a href="#" class="button small expand">Mon Compte</a>
@@ -42,6 +46,9 @@
 					<?php endif?>
 								
 					<?php if(AccessHelper::isAdmin()):?>
+						<hr>
+						<div class="small-centered columns"><strong>Options admin</strong></div>
+						<br>
 						<div>
 							<a href="index.php?task=creation" class="button small green expand">Nouvel article</a>
 						</div>

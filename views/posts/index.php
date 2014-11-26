@@ -1,15 +1,19 @@
 <?php foreach ($posts as $post): ?>
 	<div class="column">
 		<div class="row">
-			<div class="small-12 columns">
-		    	<h2><?php echo $post->titre ?></h2>
+			<div class="columns">
+		    	<h2><?php echo $post->title ?></h2>
 		    </div>	
-		    <div class="small-12 columns">
-		    	<h3><?php echo $post->soustitre ?></h3>
+		    <div class="columns">
+		    	<h3><?php echo $post->subtitle ?></h3>
 		    </div>
-		    <div class="small-12 columns">
+		    <div class="columns text-justify">
 		    	<?php echo $post->introduction ?>
 		    </div>
+		    <div class="right">
+				<div><?php echo $post->authorName ?></div>
+				<div><?php echo $post->date ?></div>
+			</div>
 		</div>
 	    <div class="row">
 	    <?php if(AccessHelper::isAdmin()):?>

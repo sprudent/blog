@@ -6,24 +6,24 @@
 <form method="post">
     <div class="row">Titre :</div>
     <div class="row">
-        <input type ="text" name="titre" id="titre" placeholder="Titre" value="<?php echo $titre?>"/>
+        <input type ="text" name="title" id="title" placeholder="Titre" value="<?php echo $title?>"/>
     </div>
     <div class="row">Sous-titre :</div>
     <div class="row">
-        <input type ="text" name="soustitre" id="soustitre" placeholder="Sous-titre" value="<?php echo $soustitre?>"/>
+        <input type ="text" name="subtitle" id="subtitle" placeholder="Sous-titre" value="<?php echo $subtitle?>"/>
     </div>
     <div class="row">Introduction :</div>
     <div class="row">
-        <textarea name="introduction" id="introduction" rows="4" cols="50"><?php echo $introduction?></textarea>
+        <textarea name="introduction" id="introduction" rows="8" cols="50"><?php echo $introduction?></textarea>
     </div>
     <div class="row">Contenu :</div>
     <div class="row">
-        <textarea name="contenu" id="contenu" rows="4" cols="50"><?php echo $contenu?></textarea>
+        <textarea name="content" id="content" rows="8" cols="50"><?php echo $content?></textarea>
     </div>
     <hr>
     <div class="row">
-        <input type="submit" name="submit" class="button small radius"/>
-        <a href="index.php" class="button small radius">Retour</a>
+        <input type="submit" name="submit" class="button small"/>
+        <a href="index.php" class="button small">Retour</a>
     </div>
 </form>
 
